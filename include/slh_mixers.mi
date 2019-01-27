@@ -1,0 +1,296 @@
+#
+#MIX COLORS
+#
+
+declare shader
+color "slh_mix_colors"
+(
+ color  "A" default 1.0 1.0 1.0 1.0,
+ color  "B" default 0.0 0.0 0.0 1.0,
+ scalar "F" default 0.5,
+)
+version 1
+#: nodeid	2013006
+apply texture
+end declare
+
+#
+#MIX SCALARS
+#
+
+declare shader
+scalar "slh_mix_scalars"
+(
+ scalar "A" default 1.0,
+ scalar "B" default 0.0,
+ scalar "F" default 0.5,
+)
+version 1
+#: nodeid	2013007
+apply texture
+end declare
+
+#
+#MIX BOOLEANS
+#
+
+declare shader
+boolean "slh_mix_booleans"
+(
+ boolean    "A" default 1,
+ boolean    "B" default 0,
+ scalar     "F" default 0.5,
+)
+version 1
+#: nodeid	2013008
+apply texture
+end declare
+
+#
+#MIX INTS
+#
+
+declare shader
+integer "slh_mix_int"
+(
+ integer    "A" default 1,
+ integer    "B" default 0,
+ scalar     "F" default 0.5,
+)
+version 1
+#: nodeid	2013009
+apply texture
+end declare
+
+#
+#MIX MIA
+#
+
+declare shader
+struct {
+    scalar  "diffuse_weight",
+    color   "diffuse",
+    scalar  "diffuse_roughness",
+ 
+    scalar  "reflectivity",
+    color   "refl_color",
+    scalar  "refl_gloss",
+    integer "refl_gloss_samples",
+    boolean "refl_interpolate",
+    boolean "refl_hl_only",
+    boolean "refl_is_metal",
+    
+    scalar  "transparency",
+    color   "refr_color",
+    scalar  "refr_gloss",
+    scalar  "refr_ior",
+    integer "refr_gloss_samples",
+    boolean "refr_interpolate",
+    boolean "refr_translucency",
+    color   "refr_trans_color",
+    scalar  "refr_trans_weight",
+    
+    scalar  "anisotropy",
+    scalar  "anisotropy_rotation",
+    integer "anisotropy_channel",
+    
+    boolean "brdf_fresnel",
+    scalar  "brdf_0_degree_refl",
+    scalar  "brdf_90_degree_refl",
+    scalar  "brdf_curve",
+    boolean "brdf_conserve_energy",
+    
+    # Reflection/Refraction optimizations & falloffs
+    
+    boolean  "refl_falloff_on",
+    scalar   "refl_falloff_dist",
+    boolean  "refl_falloff_color_on",
+    color    "refl_falloff_color",
+    integer  "refl_depth",
+    scalar   "refl_cutoff",
+    
+    boolean  "refr_falloff_on",
+    scalar   "refr_falloff_dist",
+    boolean  "refr_falloff_color_on",
+    color    "refr_falloff_color",
+    integer  "refr_depth",
+    scalar   "refr_cutoff",
+    
+    # Built in AO
+    
+    boolean  "ao_on",
+    integer  "ao_samples",
+    scalar   "ao_distance",
+    color    "ao_dark",
+    color    "ao_ambient",
+    integer  "ao_do_details",
+    
+    # Options
+    
+    boolean  "thin_walled",
+    boolean  "no_visible_area_hl",
+    boolean  "skip_inside_refl",
+    boolean  "do_refractive_caustics",
+    boolean  "backface_cull",
+    boolean  "propagate_alpha",
+    
+    # Other effects
+    
+    scalar   "hl_vs_refl_balance",
+    scalar   "cutout_opacity",
+    color    "additional_color"
+} "slh_mix_mia"
+(
+    scalar  "mask"  default 0.5, #: min 0.0 max 1.0,
+ 
+    struct "A_input" {
+        scalar  "A_diffuse_weight"      default 1.0, #: min 0.0 max 1.0
+        color   "A_diffuse"             default 0.5 0.5 0.5,
+        scalar  "A_diffuse_roughness"   default 0.0, #: min 0.0 max 1.0
+ 
+        scalar  "A_reflectivity"        default 0.6, #: min 0.0 max 1.0
+        color   "A_refl_color"          default 1.0 1.0 1.0,
+        scalar  "A_refl_gloss"          default 1.0, #: min 0.0 max 1.0 softmin 0.15
+        integer "A_refl_gloss_samples"  default 8,   #: min 0 softmax 128
+        boolean "A_refl_interpolate"    default off,
+        boolean "A_refl_hl_only"        default off,
+        boolean "A_refl_is_metal"       default off,
+        
+        scalar  "A_transparency"        default 0.0, #: min 0.0 max 1.0
+        color   "A_refr_color"          default 1.0 1.0 1.0,
+        scalar  "A_refr_gloss"          default 1.0, #: min 0.0 max 1.0
+        scalar  "A_refr_ior"            default 1.4, #: min 0.1 softmax 2.0
+        integer "A_refr_gloss_samples"  default 8,   #: min 0 softmax 128
+        boolean "A_refr_interpolate"    default off,
+        boolean "A_refr_translucency"   default off,
+        color   "A_refr_trans_color"    default 0.7 0.6 0.5,
+        scalar  "A_refr_trans_weight"   default 0.5, #: min 0.0 max 1.0
+        
+        scalar  "A_anisotropy"          default 1.0, #: min 0.1 softmax 10
+        scalar  "A_anisotropy_rotation" default 0.0, #: softmin 0 softmax 1
+        integer "A_anisotropy_channel"  default -1,  #: min -4  softmax 64
+        
+        boolean "A_brdf_fresnel"         default off,
+        scalar  "A_brdf_0_degree_refl"   default 0.2, #: min 0.0 max 1.0
+        scalar  "A_brdf_90_degree_refl"  default 1.0, #: min 0.0 max 1.0
+        scalar  "A_brdf_curve"           default 5.0, #: min 0.1 softmax 20
+        boolean "A_brdf_conserve_energy" default on,
+        
+# Reflection/Refraction optimizations & falloffs
+        
+        boolean  "A_refl_falloff_on"       default off,
+        scalar   "A_refl_falloff_dist"     default 0.0,
+        boolean  "A_refl_falloff_color_on" default off,
+        color    "A_refl_falloff_color"    default 0 0 0,
+        integer  "A_refl_depth"            default 5,    #: min 0 softmax 10
+        scalar   "A_refl_cutoff"           default 0.01, #: min 0.0 max 1.0
+        
+        boolean  "A_refr_falloff_on"       default off,
+        scalar   "A_refr_falloff_dist"     default 0.0,
+        boolean  "A_refr_falloff_color_on" default off,
+        color    "A_refr_falloff_color"    default 0 0 0,
+        integer  "A_refr_depth"            default 5,    #: min -1 softmax 10
+        scalar   "A_refr_cutoff"           default 0.01, #: min 0.0 max 1.0
+        
+# Built in AO
+        
+        boolean  "A_ao_on"          default off,
+        integer  "A_ao_samples"     default 16,          #: min 0 softmax 128
+        scalar   "A_ao_distance"    default 10.0,
+        color    "A_ao_dark"        default 0.2 0.2 0.2,
+        color    "A_ao_ambient"     default 0.0 0.0 0.0,
+        integer  "A_ao_do_details"  default 1,           #: min 0 max 2 enum "Off:On:With color bleed"
+        
+# Options
+        
+        boolean  "A_thin_walled"            default off,
+        boolean  "A_no_visible_area_hl"     default on,
+        boolean  "A_skip_inside_refl"       default on,
+        boolean  "A_do_refractive_caustics" default off,
+        boolean  "A_backface_cull"          default off,
+        boolean  "A_propagate_alpha"        default off,
+        
+# Other effects
+        
+        scalar   "A_hl_vs_refl_balance"     default 1.0,   #: min 0.0 softmax 1.0
+        scalar   "A_cutout_opacity"         default 1.0,   #: min 0.0 max 1.0
+        color    "A_additional_color"       default 0 0 0 0
+    },
+    struct "B_input" {
+        scalar  "B_diffuse_weight"      default 1.0, #: min 0.0 max 1.0
+        color   "B_diffuse"             default 0.5 0.5 0.5,
+        scalar  "B_diffuse_roughness"   default 0.0, #: min 0.0 max 1.0
+        
+        scalar  "B_reflectivity"        default 0.6, #: min 0.0 max 1.0
+        color   "B_refl_color"          default 1.0 1.0 1.0,
+        scalar  "B_refl_gloss"          default 1.0, #: min 0.0 max 1.0 softmin 0.15
+        integer "B_refl_gloss_samples"  default 8,   #: min 0 softmax 128
+        boolean "B_refl_interpolate"    default off,
+        boolean "B_refl_hl_only"        default off,
+        boolean "B_refl_is_metal"       default off,
+        
+        scalar  "B_transparency"        default 0.0, #: min 0.0 max 1.0
+        color   "B_refr_color"          default 1.0 1.0 1.0,
+        scalar  "B_refr_gloss"          default 1.0, #: min 0.0 max 1.0
+        scalar  "B_refr_ior"            default 1.4, #: min 0.1 softmax 2.0
+        integer "B_refr_gloss_samples"  default 8,   #: min 0 softmax 128
+        boolean "B_refr_interpolate"    default off,
+        boolean "B_refr_translucency"   default off,
+        color   "B_refr_trans_color"    default 0.7 0.6 0.5,
+        scalar  "B_refr_trans_weight"   default 0.5, #: min 0.0 max 1.0
+        
+        scalar  "B_anisotropy"          default 1.0, #: min 0.1 softmax 10
+        scalar  "B_anisotropy_rotation" default 0.0, #: softmin 0 softmax 1
+        integer "B_anisotropy_channel"  default -1,  #: min -4  softmax 64
+        
+        boolean "B_brdf_fresnel"         default off,
+        scalar  "B_brdf_0_degree_refl"   default 0.2, #: min 0.0 max 1.0
+        scalar  "B_brdf_90_degree_refl"  default 1.0, #: min 0.0 max 1.0
+        scalar  "B_brdf_curve"           default 5.0, #: min 0.1 softmax 20
+        boolean "B_brdf_conserve_energy" default on,
+        
+# Reflection/Refraction optimizations & falloffs
+        
+        boolean  "B_refl_falloff_on"       default off,
+        scalar   "B_refl_falloff_dist"     default 0.0,
+        boolean  "B_refl_falloff_color_on" default off,
+        color    "B_refl_falloff_color"    default 0 0 0,
+        integer  "B_refl_depth"            default 5,    #: min 0 softmax 10
+        scalar   "B_refl_cutoff"           default 0.01, #: min 0.0 max 1.0
+        
+        boolean  "B_refr_falloff_on"       default off,
+        scalar   "B_refr_falloff_dist"     default 0.0,
+        boolean  "B_refr_falloff_color_on" default off,
+        color    "B_refr_falloff_color"    default 0 0 0,
+        integer  "B_refr_depth"            default 5,    #: min -1 softmax 10
+        scalar   "B_refr_cutoff"           default 0.01, #: min 0.0 max 1.0
+        
+# Built in AO
+        
+        boolean  "B_ao_on"          default off,
+        integer  "B_ao_samples"     default 16,          #: min 0 softmax 128
+        scalar   "B_ao_distance"    default 10.0,
+        color    "B_ao_dark"        default 0.2 0.2 0.2,
+        color    "B_ao_ambient"     default 0.0 0.0 0.0,
+        integer  "B_ao_do_details"  default 1,           #: min 0 max 2 enum "Off:On:With color bleed"
+        
+# Options
+        
+        boolean  "B_thin_walled"            default off,
+        boolean  "B_no_visible_area_hl"     default on,
+        boolean  "B_skip_inside_refl"       default on,
+        boolean  "B_do_refractive_caustics" default off,
+        boolean  "B_backface_cull"          default off,
+        boolean  "B_propagate_alpha"        default off,
+        
+# Other effects
+        
+        scalar   "B_hl_vs_refl_balance"     default 1.0,   #: min 0.0 softmax 1.0
+        scalar   "B_cutout_opacity"         default 1.0,   #: min 0.0 max 1.0
+        color    "B_additional_color"       default 0 0 0 0
+    },
+)
+version 1
+#: nodeid	2013010
+apply texture
+end declare

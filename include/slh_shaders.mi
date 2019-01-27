@@ -1,0 +1,122 @@
+declare shader
+color "slh_lightPlate"
+(
+    color  "color"         default 1 1 1 1,
+    scalar "intensity"     default 1,
+	scalar "fg_multiplier" default 1,
+    scalar "transparency"  default 1
+)
+#: nodeid 2010004
+version 2
+apply material
+end declare
+
+
+
+declare shader
+color "slh_alphaShade" ()
+#: nodeid	2011003
+version 1
+apply material
+end declare
+
+
+declare shader
+color "slh_heightRamp"
+(
+    scalar "white_height" default 0,
+    scalar "black_height" default 10
+)
+#: nodeid 2012005
+version 1
+apply material
+end declare
+
+
+declare shader
+color "slh_dispersion"
+(
+    scalar	"ior"		  default 1.33,
+    color   "refraction"  default 0 0 0 1,
+    scalar  "scatter"     default 0.0,
+    integer "samples"     default 1,
+)
+#: nodeid	2013002
+version 1
+apply material
+end declare
+
+
+declare shader
+color "slh_metal"
+(
+    color   "eta"           default 3.97 2.38 1.59 1.0,
+    color   "k"             default 0.14 0.37 1.43 1.0,
+    scalar  "rouphness"     default 0,
+    integer "samples"       default 16,
+    vector  "bump"  default 0 0 0,
+
+)
+#: nodeid   2018001
+version 1
+apply material
+end declare
+
+declare shader
+color "slh_metal_schlick"
+(
+    color   "color" default 0.966 0.801 0.323 1.0,
+)
+#: nodeid   2018002
+version 1
+apply material
+end declare
+
+declare shader
+color "slh_layer" (
+    array struct "shader_list" {
+        scalar  "weight", 
+        shader  "shader" 
+    },
+    vector "bump" default 0 0 0
+)
+#: nodeid   2019001
+version 1
+apply material
+end declare
+
+
+declare shader
+color "slh_glass"
+(
+    scalar  "eta"                       default 1.5,
+    color   "reflect_k"                 default 1.0 1.0 1.0,
+    scalar  "reflection_roughness"      default 0,
+    integer "reflection_samples"        default 16,
+    color   "refract_k"                 default 1.0 1.0 1.0,
+    scalar  "transmission_roughness"    default 0,
+    integer "transmission_samples"      default 16,
+    vector  "bump"                      default 0 0 0,
+)
+#: nodeid   2019003
+version 1
+apply material
+end declare
+
+
+declare shader
+color "slh_plastic"
+(
+    scalar  "eta"                   default 1.5,
+    color   "reflect_k"             default 1.0 1.0 1.0,
+    scalar  "rouphness"             default 0,
+    color   "diffuse_k"             default 1.0 1.0 1.0,
+    scalar  "sigma"                 default 0,
+    integer "samples"               default 16,
+    vector  "bump"                  default 0 0 0,
+    array light "lights",
+)
+#: nodeid   2019004
+version 1
+apply material
+end declare

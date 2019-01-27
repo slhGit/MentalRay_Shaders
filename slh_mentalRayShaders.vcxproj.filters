@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Include">
+      <UniqueIdentifier>{88ea423e-8908-4271-b5c2-acaff5b36c7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\auxil">
+      <UniqueIdentifier>{7068728a-697f-4880-9eeb-9dd4b52a4cd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\pbrt">
+      <UniqueIdentifier>{6334e2a4-6cf4-4334-929e-959ce3764535}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\pbrt\core">
+      <UniqueIdentifier>{f998c698-e415-490b-b28f-1d3d6396fad3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\pbrt_shaders">
+      <UniqueIdentifier>{c967e012-4ce0-4958-a2cf-384adc50f4e5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\slh_mixers.mi">
+      <Filter>Include</Filter>
+    </None>
+    <None Include="include\slh_shaders.mi">
+      <Filter>Include</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="auxil\slh_aux.cpp">
+      <Filter>Source Files\auxil</Filter>
+    </ClCompile>
+    <ClCompile Include="auxil\miaux.cpp">
+      <Filter>Source Files\auxil</Filter>
+    </ClCompile>
+    <ClCompile Include="slh_alphaShade.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="slh_heightRamp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="slh_lightPlate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="slh_mixers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pbrt\core\geometry.cpp">
+      <Filter>Source Files\pbrt\core</Filter>
+    </ClCompile>
+    <ClCompile Include="pbrt\core\reflection.cpp">
+      <Filter>Source Files\pbrt\core</Filter>
+    </ClCompile>
+    <ClCompile Include="pbrt\core\microfacet.cpp">
+      <Filter>Source Files\pbrt\core</Filter>
+    </ClCompile>
+    <ClCompile Include="pbrt\core\spectrum.cpp">
+      <Filter>Source Files\pbrt\core</Filter>
+    </ClCompile>
+    <ClCompile Include="pbrt\core\sampling.cpp">
+      <Filter>Source Files\pbrt\core</Filter>
+    </ClCompile>
+    <ClCompile Include="pbrt\core\interpolation.cpp">
+      <Filter>Source Files\pbrt\core</Filter>
+    </ClCompile>
+    <ClCompile Include="slh_layer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="slh_dispersion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="slh_pbrt\slh_pbrt.cpp">
+      <Filter>Source Files\pbrt_shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="slh_pbrt\slh_pbrt_glass.cpp">
+      <Filter>Source Files\pbrt_shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="slh_pbrt\slh_pbrt_metal.cpp">
+      <Filter>Source Files\pbrt_shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="slh_pbrt\slh_pbrt_plastic.cpp">
+      <Filter>Source Files\pbrt_shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="slh_pbrt\slh_pbrt_stuff.cpp">
+      <Filter>Source Files\pbrt_shaders</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="slh_pbrt\slh_pbrt.h">
+      <Filter>Source Files\pbrt_shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="auxil\slh_vectors.h">
+      <Filter>Source Files\auxil</Filter>
+    </ClInclude>
+    <ClInclude Include="auxil\slh_colors.h">
+      <Filter>Source Files\auxil</Filter>
+    </ClInclude>
+    <ClInclude Include="auxil\slh_aux.h">
+      <Filter>Source Files\auxil</Filter>
+    </ClInclude>
+    <ClInclude Include="auxil\miaux.h">
+      <Filter>Source Files\auxil</Filter>
+    </ClInclude>
+    <ClInclude Include="pbrt\core\stringprint.h">
+      <Filter>Source Files\pbrt\core</Filter>
+    </ClInclude>
+    <ClInclude Include="pbrt\core\error.h">
+      <Filter>Source Files\pbrt\core</Filter>
+    </ClInclude>
+    <ClInclude Include="pbrt\core\geometry.h">
+      <Filter>Source Files\pbrt\core</Filter>
+    </ClInclude>
+    <ClInclude Include="pbrt\core\interpolation.h">
+      <Filter>Source Files\pbrt\core</Filter>
+    </ClInclude>
+    <ClInclude Include="pbrt\core\microfacet.h">
+      <Filter>Source Files\pbrt\core</Filter>
+    </ClInclude>
+    <ClInclude Include="pbrt\core\pbrt.h">
+      <Filter>Source Files\pbrt\core</Filter>
+    </ClInclude>
+    <ClInclude Include="pbrt\core\reflection.h">
+      <Filter>Source Files\pbrt\core</Filter>
+    </ClInclude>
+    <ClInclude Include="pbrt\core\rng.h">
+      <Filter>Source Files\pbrt\core</Filter>
+    </ClInclude>
+    <ClInclude Include="pbrt\core\sampling.h">
+      <Filter>Source Files\pbrt\core</Filter>
+    </ClInclude>
+    <ClInclude Include="pbrt\core\spectrum.h">
+      <Filter>Source Files\pbrt\core</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
